@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 設定圖像的大小
+fig, ax = plt.subplots(figsize=(6, 6))
+
+# 創建一個黑色背景的畫布
+canvas = np.zeros((400, 400, 3))
+
+# 設定線條的間距和粗細
+line_spacing = 40  # 線條間距
+line_thickness = 5  # 線條粗細
+dot_radius = 4  # 白點半徑
+
+# 繪製白色線條
+for i in range(0, 400, line_spacing):
+    # 繪製垂直線
+    canvas[:, i:i + line_thickness] = [0.8, 0.8, 0.8]
+    # 繪製水平線
+    canvas[i:i + line_thickness, :] = [0.8, 0.8, 0.8]
+
+# 顯示背景網格
+ax.imshow(canvas)
+
+# 繪製交叉點上的白色圓點
+for i in range(line_spacing, 400, line_spacing):
+    for j in range(line_spacing, 400, line_spacing):
+        # 使用 matplotlib 的 Circle 繪製白色圓點
+        circle = plt.Circle((j + line_thickness/2, i + line_thickness/2), dot_radius, color='white')
+        ax.add_artist(circle)
+
+# 關閉坐標軸並顯示圖片
+ax.set_xticks([])
+ax.set_yticks([])
+plt.show()
